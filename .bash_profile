@@ -1,6 +1,6 @@
 # bash for arch linux
 
-export EMAIL=ysmiraak@gmail.com
+export EMAIL=jan.milde@hotmail.de
 export ALTERNATE_EDITOR=emacs
 export EDITOR=emacsclient
 export VISUAL=emacsclient

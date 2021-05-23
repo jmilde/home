@@ -1,11 +1,15 @@
-* home
+* Setup
+1) install base from pac.org
+2) install system from pac.org
+3) install window manager from pac.org
+4) create relevant links with
+   #+begin_src bash
+   bash ~/jan/home/.xmonad
+#+end_src
+5) install utility from pac.org
+6) install app from pac.org
+   - follow the instruction in .emacs.d/setup.org to set up emacs
 
-- [[.emacs.d/setup.org][emacs setup]]
-- [[https://ysmiraak.github.io/home/][a library of stolen ideas]]
-- [[lit.org][literature index]]
+7) install lang from pac.org
 
-* license
-
-copyright © 2017 ysmiraak
-
-distributed under the eclipse public license either version 1.0 or (at your option) any later version.
+8) on the dell laptop install dell laptop from pac.org

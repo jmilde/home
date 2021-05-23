@@ -1,5 +1,5 @@
 #+TITLE: emacs setup
-#+AUTHOR: ysmiraak
+#+AUTHOR: (mostly ysmiraak)
 * general
 ** init
 [[https://www.gnu.org/software/emacs/][emacs 25]] is required.
@@ -607,6 +607,40 @@ this applies to all language-specific modes which offers the options.
 #+BEGIN_SRC emacs-lisp
   (add-hooks 'org-mode-hook #'turn-on-org-cdlatex)
   (delight 'org-cdlatex-mode nil 'org)
+  ; add an UID when creating any capture
+  (add-hook 'org-capture-prepare-finalize-hook 'org-id-get-create)
+
+  ;key bindings
+  (global-set-key (kbd "C-c o")
+                (lambda () (interactive) (find-file "~/shared/org/orgfiles/life.org")))
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (bind-key "C-c c" 'org-capture)
+  (bind-key "C-c a" 'org-agenda)
+
+  (setq org-todo-keywords '((sequence  "TODO(t!)" "PROCESSING(p!)" "WAIT(w!)" "|" "DONE(d!)" "CANCELED(c@!)")))
+  (setq org-todo-keyword-faces
+    '(("PROCESSING" . "orange")
+     ("CANCELED" . "grey")))
+
+  (setq org-capture-templates
+    '(
+    ("t" "TODO" entry (file "~/shared/org/orgfiles/inbox.org") (file "~/shared/org/templates/tpl_todo.txt") :empty-lines-after 1)
+    ("d" "daily" entry (file+olp+datetree "~/shared/org/orgfiles/life.org" "daily") (file "~/shared/org/templates/tpl_daily.txt")  :empty-lines-after 1)
+    ("p" "Private Templates")
+      ("pb" "Book-list" entry (file+headline "~/shared/org/orgfiles/life.org" "book list") (file "~/shared/org/templates/tpl_books.txt") :empty-lines-after 1)
+      ("pj" "Journal" entry (file+datetree "~/shared/org/orgfiles/journal.org") "** %T - %^{Heading}")
+      ("pr" "Weekly Review" entry (file+datetree "~/shared/org/orgfiles/weekly_review.org") (file "~/shared/org/templates/tpl_weekly_review.txt"))
+   ("s" "Shopping" entry (file "~/shared/org/orgfiles/backlog.org") (file "~/shared/org/templates/tpl_shopping.txt") :empty-lines 1)
+   ("w"  "work")
+   ("wi" "interview" entry(file+headline "~/shared/org/orgfiles/interviews.org" "doctors") (file "~/shared/org/templates/tpl_interview.txt") :emtpy-lines-after 1)
+
+  ))
+
+  (setq org-agenda-files (list
+  "~/shared/org/orgfiles/backlog.org"
+  "~/shared/org/orgfiles/life.org"
+  "~/shared/org/orgfiles/journal.org"))
+
   (with-eval-after-load 'org
     (cset 'org-adapt-indentation                  nil
           'org-log-done                           'time
@@ -627,6 +661,12 @@ this applies to all language-specific modes which offers the options.
     (defalias 'org-beamer-bold 'org-latex-bold)
     (cset 'org-beamer-outline-frame-title "outline"))
 #+END_SRC
+** yaml
+#+begin_src emacs-lisp
+(add-hook 'yaml-mode-hook
+          (lambda ()
+            (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+#+end_src
 * summary
 default ~customized~ +overwritten+
 ** chord
