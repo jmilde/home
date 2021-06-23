@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+ln -rs ~/.xmonad/.bashrc     ~/.bashrc
+ln -rs ~/.xmonad/.xinitrc    ~/.xinitrc
+ln -rs ~/.xmonad/.xserverrc  ~/.xserverrc
+ln -rs ~/.xmonad/.Xresources ~/.Xresources

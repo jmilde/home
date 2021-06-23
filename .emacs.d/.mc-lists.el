@@ -46,6 +46,7 @@
         indent-new-comment-line
         keyboard-quit
         kill-region
+        mark-sexp
         markdown-cycle
         markdown-electric-backquote
         markdown-insert-bold

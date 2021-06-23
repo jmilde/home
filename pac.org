@@ -69,6 +69,8 @@ ripgrep
 tree
 zip
 dmenu
+udisk2
+udiskie
 gmrun
 openssh
 git

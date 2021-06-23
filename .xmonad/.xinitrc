@@ -13,4 +13,5 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 fcitx & sleep 2
+udiskie &
 exec xmonad

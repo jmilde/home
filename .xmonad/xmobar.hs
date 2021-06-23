@@ -3,15 +3,15 @@ Config
   , commands =
       [ Run StdinReader
       , Run Battery
-        [ "--template" , "<acstatus>"
+        [ "--template" , "bat <acstatus> "
         , "--Low"      , "20"
         , "--High"     , "50"
         , "--normal"   , "green"
         , "--low"      , "red"
         , "--"
-        , "-o" , "<left>% ~<timeleft>"
+        , "-o" , "<left>%|<timeleft>"
         , "-O" , "<left>% ..."
-        , "-i" , ""
+        , "-i" , "<left>%"
         ] 40
       , Run Cpu
         [ "--template" , "cpu <total>%"
@@ -27,6 +27,6 @@ Config
         , "--normal"   , "green"
         , "--high"     , "red"
         ] 40
-      , Run Date "%#Z %R %#a %F" "date" 600
+      , Run Date "%R %#a %F" "date" 600
       ]
   }

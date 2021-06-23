@@ -4,7 +4,7 @@
 3) install window manager from pac.org
 4) create relevant links with
    #+begin_src bash
-   bash ~/jan/home/.xmonad
+   bash ~/jan/home/.xmonad/create-links
 #+end_src
 5) install utility from pac.org
 6) install app from pac.org

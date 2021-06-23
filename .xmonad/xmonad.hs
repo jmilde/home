@@ -24,8 +24,9 @@ main = do
       , XMonad.logHook Desktop.desktopConfig ]
     , XMonad.startupHook = mconcat
       [ SetWMName.setWMName "LG3D"
-      , SpawnOn.spawnOn "9" "emacs"
-      , SpawnOn.spawnOn "8" "firefox"
+      , SpawnOn.spawnOn "1" "emacs"
+      , SpawnOn.spawnOn "2" "firefox"
+      , SpawnOn.spawnOn "9" "thunderbird"
       , XMonad.startupHook Desktop.desktopConfig ]
     , XMonad.manageHook = mconcat
       [ InsertPosition.insertPosition InsertPosition.End InsertPosition.Newer
