@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-
-transmission-qt &
-
-trap 'openpyn -x' EXIT
-xterm -e 'openpyn de -f --p2p'
