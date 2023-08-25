@@ -6,6 +6,7 @@
         LaTeX-babel-insert-hyphen
         LaTeX-insert-left-brace
         TeX-insert-backslash
+        backward-kill-sentence
         backward-sentence
         backward-sexp
         beginning-of-buffer
@@ -29,8 +30,10 @@
         delete-indentation
         delete-region
         dired-do-rename
+        dired-flag-file-deletion
         dired-mark
         downcase-region
+        elpy-nav-indent-shift-right
         end-of-visual-line
         ess-smart-comma
         ess-yank
@@ -57,6 +60,7 @@
         markdown-insert-header-atx-5
         markdown-insert-header-atx-6
         markdown-outdent-or-delete
+        mc/mark-all-in-region
         org-beginning-of-line
         org-cdlatex-math-modify
         org-cdlatex-underscore-caret
@@ -116,6 +120,8 @@
         describe-key
         ediprolog-dwim
         end-of-buffer
+        eval-dwim:elpy
+        find-file
         global-hungry-delete-mode
         ido-find-file
         ido-switch-buffer
