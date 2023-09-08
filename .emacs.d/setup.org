@@ -29,7 +29,7 @@ occasionally, some update is buggy.  just revert to the [[https://stable.melpa.o
 
 if no archive is existing then refresh list, generally can run `package-refresh-contents`
 #+begin_src emacs-lisp
-  (package-initialize)
+  ;;(package-initialize)
   (unless package-archive-contents
     (package-refresh-contents)
     (all-the-icons-install-fonts) ; needed after first setup to make icons work
@@ -107,8 +107,11 @@ deactivate emacs default elements for a minimal look
 
  pick a theme
  #+begin_src emacs-lisp
-(use-package doom-themes
-  :init (load-theme 'doom-opera t))
+   (use-package modus-themes
+     :ensure t
+     :config
+     (setq modus-themes-org-blocks 'gray-background)
+     (load-theme 'modus-vivendi))
  #+end_src
 
 
@@ -464,7 +467,6 @@ Needs to be called in the individual language setups
 * Org mode
 ** Styling
 #+begin_src emacs-lisp
-
   (defun custom/org-font-setup ()
     ;; Replace list hyphen with dot
     (font-lock-add-keywords 'org-mode
@@ -487,11 +489,7 @@ Needs to be called in the individual language setups
     (org-indent-mode)
     (visual-line-mode 1))
 
-  (use-package org
-    :hook (org-mode . custom/org-mode-setup)
-    :config
-    (setq org-ellipsis " ▾") ; show symbol instead of '...' at the end of a header
-    (custom/org-font-setup))
+
 
   (use-package org-bullets ; use symbols instead of asterix for the headers
     :after org
@@ -499,7 +497,23 @@ Needs to be called in the individual language setups
     :custom
     (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 #+end_src
+** Org setup
+#+BEGIN_SRC emacs-lisp
+  (use-package org
+    :hook (org-mode . custom/org-mode-setup)
+    :config
+    (setq org-ellipsis " ▾") ; show symbol instead of '...' at the end of a header
+    (setq org-todo-keywords '((sequence  "TODO(t!)" "PROCESSING(p!)" "WAIT(w!)" "|" "DONE(d!)" "CANCELED(c@!)")))
+    (setq org-todo-keyword-faces
+          '(("PROCESSING" . "orange")
+            ("CANCELED" . "grey")))
+    (setq org-agenda-files (list
+                            "~/org/orgfiles/backlog.org"
+                            "~/org/orgfiles/life.org"
+                            "~/org/orgfiles/journal.org"))
 
+    (custom/org-font-setup))
+#+END_SRC
 ** language setup
 To execute or export code in org-mode code blocks, you’ll need to set up org-babel-load-languages for each languag you’d like to use.
 https://orgmode.org/worg/org-contrib/babel/languages/index.html documents all of the languages that you can use with org-babel.
@@ -525,6 +539,32 @@ You can add more =src= block templates below by copying one of the lines and cha
   (add-to-list 'org-structure-template-alist '("py" . "src python")))
 
 #+end_src
+
+** keybindings
+#+BEGIN_SRC emacs-lisp
+ (global-set-key (kbd "C-c o")
+                (lambda () (interactive) (find-file "~/org/orgfiles/life.org")))
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (bind-key "C-c c" 'org-capture)
+  (bind-key "C-c a" 'org-agenda)
+#+END_SRC
+
+** templates
+#+BEGIN_SRC emacs-lisp
+(setq org-capture-templates
+    '(
+    ("t" "TODO" entry (file "~/org/orgfiles/inbox.org") (file "~/org/templates/tpl_todo.txt") :empty-lines-after 1)
+    ("d" "daily" entry (file+olp+datetree "~/org/orgfiles/life.org" "daily") (file "~/org/templates/tpl_daily.txt")  :empty-lines-after 1)
+    ("w"  "weekly plan" entry (file+olp+datetree "~/org/orgfiles/life.org" "daily") (file "~/org/templates/tpl_weekly_plan.txt")  :empty-lines-after 1)
+    ("p" "Private Templates")
+      ("pb" "Book-list" entry (file+headline "~/org/orgfiles/life.org" "book list") (file "~/org/templates/tpl_books.txt") :empty-lines-after 1)
+      ("pj" "Journal" entry (file+datetree "~/org/orgfiles/journal.org") "** %T - %^{Heading}")
+      ("pr" "Weekly Review" entry (file+datetree "~/org/orgfiles/weekly_review.org") (file "~/org/templates/tpl_weekly_review.txt"))
+   ("s" "Shopping" entry (file "~/org/orgfiles/backlog.org") (file "~/org/templates/tpl_shopping.txt") :empty-lines 1)
+
+
+  ))
+#+END_SRC
 * Development
 ** Company Mode
 
