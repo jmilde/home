@@ -185,11 +185,12 @@ toggle line numbers
 
 avy for jumping to lines/word
 #+begin_src emacs-lisp
-  (use-package avy
-    :bind
-    (("M-g h" . avy-org-goto-heading-timer) ; jump to header in org file
-     ("M-g c" . avy-goto-char-2))
-    )
+    (use-package avy
+      :bind
+      (("M-g h" . avy-org-goto-heading-timer) ; jump to header in org file
+       ("M-g c" . avy-goto-char-2)
+       ("M-g w" . avy-goto-word-0))
+      )
 #+end_src
 
 *** history
